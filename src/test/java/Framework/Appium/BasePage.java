@@ -8,11 +8,14 @@ import java.util.Properties;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class BasePage {
 	
-	static WebDriver drv;
+	public RemoteWebDriver remoteDriver;
+	
+	
 	public static String getProperties(String key) {
 		
 		String value = "";
@@ -30,10 +33,6 @@ public class BasePage {
 			
 	}
 	
-	public static WebDriverWait waitObject () {
-		WebDriverWait wait = new WebDriverWait(drv,30);
-		return  wait;
-		
-	}
+	
 
 }

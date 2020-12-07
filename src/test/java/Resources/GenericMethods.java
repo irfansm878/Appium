@@ -1,17 +1,30 @@
 package Resources;
 
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
+
+import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import Framework.Appium.BasePage;
 import io.appium.java_client.PerformsTouchActions;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.touch.offset.PointOption;
 
-public class GenericMethods {
+public class GenericMethods extends BasePage {
+	
+	private static final int MAX_TIMEOUT = 5;
+	private static final int MIN_TIMEOUT = 10;
+	
 	public static boolean waitForPresence(AndroidDriver driver, int timeLimitInSeconds, WebElement element){
 
 		boolean isElementPresent;
@@ -111,5 +124,74 @@ public class GenericMethods {
 	{
 		Thread.sleep(wait_time * 1000);
 	}
+	public boolean waitForObjectExists(By locator) {
+        return waitForObjectExists(locator, MAX_TIMEOUT);
+    }
+	public boolean waitForObjectExists(By locator, int timeout) {
+        ExecutorService executor = Executors.newCachedThreadPool();
+        WebDriver remoteDriver = null;
+		WaitForObjectExists task = new WaitForObjectExists(remoteDriver, null, locator);
+        Future<Boolean> future = executor.submit(task);
+        try {
+            return future.get(timeout, TimeUnit.SECONDS);
+        } catch (Exception e) {
+        } finally {
+            executor.shutdownNow();
+        }
+        return false;
+    }
+	class WaitForObjectExists implements Callable<Boolean> {
+	    WebDriver remoteDriver = null;
+	    WebElement pElement = null;
+	    By locator = null;
+	   
+	    WaitForObjectExists(WebDriver remoteDriver, WebElement pElement, By locator) {
+	        this.remoteDriver = remoteDriver;
+	        this.pElement = pElement;
+	        this.locator = locator;
+	    }
 
-}
+		public Boolean call() throws Exception {
+			// TODO Auto-generated method stub
+			return null;
+		}
+		
+		  public boolean checkElementExists(String objDesc, By locator)
+		    {
+		        ExecutorService executor = Executors.newCachedThreadPool();
+		        CheckForObjectExists task = new CheckForObjectExists(remoteDriver, null, locator);
+		        Future<Boolean> future = executor.submit(task);
+		        try {
+		            if (future.get(MIN_TIMEOUT, TimeUnit.SECONDS))
+		                return true;
+		        } catch (TimeoutException e) {
+		           
+		          
+		           
+		        } catch (Exception e) {
+		        } finally {
+		            executor.shutdownNow();
+		        }
+				return false;
+				
+				
+				 
+		       
+		       	    }
+		  class CheckForObjectExists implements Callable<Boolean> {
+				WebDriver remoteDriver = null;
+				WebElement pElement = null;
+				By locator = null;
+				
+				CheckForObjectExists(WebDriver remoteDriver, WebElement pElement, By locator) {
+					this.remoteDriver = remoteDriver;
+					this.pElement = pElement;
+					this.locator = locator;
+				}
+
+				public Boolean call() throws Exception {
+					// TODO Auto-generated method stub
+					return null;
+				}
+
+	}}}

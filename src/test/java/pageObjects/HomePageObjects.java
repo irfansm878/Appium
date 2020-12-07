@@ -3,86 +3,70 @@ package pageObjects;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
 import Framework.Appium.BasePage;
+import Resources.GenericMethods;
+import io.appium.java_client.pagefactory.AndroidFindBy;
 
 public class HomePageObjects extends BasePage {
 	
-	public static BasePage bs = new BasePage();
+	WebDriver driver;
+	GenericMethods gm= new GenericMethods ();
 	
-	
-public WebDriver driver;
-	
-	
-	public WebElement BookFlightButton() {
-		
-	WebElement BookFlightButton = driver.findElement(By.xpath("//android.widget.TextView[@text='BOOK FLIGHT']"));
-		return BookFlightButton;
-		}
-	
-	public WebElement OneWayOption() {
-		
-		WebElement OneWayOption = driver.findElement(By.xpath("//android.widget.TextView[2]\").click()"));
-			return OneWayOption;
-			}
-	
-public WebElement FromOption() {
-		
-		WebElement FromOption = driver.findElement(By.xpath("//android.widget.TextView[@text='From']"));
-			return FromOption;
-			}
+	 public HomePageObjects(WebDriver driver){
 
-public WebElement ToOption() {
-	
-	WebElement ToOption = driver.findElement(By.xpath("//android.widget.TextView[@text='To']"));
-		return ToOption;
-		}
+	        this.driver = driver;
 
-public WebElement ToArrival() {
-	
-	WebElement ToArrival = driver.findElement(By.xpath("//android.widget.EditText[@text='Search for departure airport']"));
-		return ToArrival;
-		}
-public WebElement FromDeparture() {
-	
-	WebElement FromDeparture = driver.findElement(By.xpath("//android.widget.EditText[@text='Search for departure airport']"));
-		return FromDeparture;
-		}
+	        //This initElements method will create all WebElements
 
-public  WebElement FromCity() {
+	        PageFactory.initElements(driver, this);
+
+	    }
 	
-	WebElement FromCity = driver.findElement(By.xpath("//android.widget.TextView[@text='Orlando, FL - MCO']"));
-	return FromCity;
+	
+@AndroidFindBy(xpath="//android.widget.TextView[@text='BOOK FLIGHT']")
+public WebElement BookFlightButton;
+	
+	
+@AndroidFindBy(xpath="//android.widget.TextView[2]")
+	public WebElement OneWayOption;
+
+@AndroidFindBy(xpath="//android.widget.TextView[@text='From']")
+public WebElement FromOption;
+
+	
+@AndroidFindBy(xpath="//android.widget.TextView[@text='To']")	
+public WebElement ToOption;
 
 
-		}
-public WebElement ToCity() {
-	
-	WebElement ToCity = driver.findElement(By.xpath("//android.widget.TextView[@text='St. Louis, MO - STL']"));
-	return ToCity;
+@AndroidFindBy(xpath="//android.widget.EditText[@text='Search for departure airport']")
+public WebElement ToArrival;
 
-		}
-public WebElement SelectDepart() {
-	
-	WebElement SelectDepart = driver.findElement(By.xpath("//android.widget.TextView[@text='Select Depart']"));
-		return SelectDepart;
-		}
-public WebElement DepartDay() {
-	
-	WebElement DepartDay = driver.findElement(By.xpath("//android.widget.TextView[@text='31']"));
-		return DepartDay;
-		}
+@AndroidFindBy(xpath="//android.widget.EditText[@text='Search for departure airport']")
+public WebElement FromDeparture;
 
-public WebElement DepartDone() {
-	
-	WebElement DepartDone = driver.findElement(By.xpath("//android.widget.TextView[@content-desc='Done']"));
-		return DepartDone;
-		}
-public WebElement FindFlightsButton() {
-	
-	WebElement FindFlightsButton = driver.findElement(By.xpath("//android.widget.Button[@text='FIND FLIGHTS']"));
-		return FindFlightsButton;
-		}
+@AndroidFindBy(xpath="//android.widget.TextView[@text='Orlando, FL - MCO']")
+public WebElement FromCity;
+
+
+@AndroidFindBy(xpath="//android.widget.TextView[@text='St. Louis, MO - STL']")
+public WebElement ToCity;
+
+@AndroidFindBy(xpath="//android.widget.TextView[@text='Select Depart']")
+public WebElement SelectDepart;
+
+@AndroidFindBy(xpath="//android.widget.TextView[@text='31']")
+public WebElement DepartDay;
+
+@AndroidFindBy(xpath="//android.widget.TextView[@content-desc='Done']")
+public WebElement DepartDone;
+
+@AndroidFindBy(xpath="//android.widget.Button[@text='FIND FLIGHTS']")
+public WebElement FindFlightsButton;
+
+
+
 
 }

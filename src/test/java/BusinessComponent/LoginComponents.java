@@ -2,20 +2,27 @@ package BusinessComponent;
 
 import java.net.URL;
 
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Reporter;
 
 import Framework.Appium.BasePage;
 import Resources.GenericMethods;
+
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.AndroidElement;
 import pageObjects.LoginPageObjects;
 
 public class LoginComponents extends BasePage {
 	
-	static LoginPageObjects lb = null;
+	LoginPageObjects lb;
+	GenericMethods gm;
 	
-	
+	static WebDriver driver;
 	
 public static AndroidDriver<AndroidElement> LaunchApp() throws Exception {
 		
@@ -34,17 +41,5 @@ public static AndroidDriver<AndroidElement> LaunchApp() throws Exception {
 		
 	}
 
-public static void login() throws Exception {
-	lb = new LoginPageObjects();
-	//GenericMethods gm = new GenericMethods();
-	Thread.sleep(10000);
-	
-	//lb.usernameTextbox().sendKeys(BasePage.getProperties("username"));
-	//lb.passwordTextbox().sendKeys(BasePage.getProperties("password"));
-	//lb.LoginButton().click();
-	lb.continueasGuest().click();
-		
-	
-}
 
 }
