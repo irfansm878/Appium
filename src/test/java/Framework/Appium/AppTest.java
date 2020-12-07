@@ -21,6 +21,7 @@ public class AppTest extends BasePage
 		LoginComponents glogin = new LoginComponents();
 		WebDriver driver = glogin.LaunchApp();
 		LoginPageObjects lb = new LoginPageObjects(driver);
+		
 		FlightBookingComponents fb = new FlightBookingComponents();
 		
 		
